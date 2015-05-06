@@ -13,9 +13,7 @@ javascript: (function () {
 	jbCode.setAttribute('id', 'jbbot_code'); 
 	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/blob/master/JBBotPlug_001_001.js'); 
 	document.body.appendChild(jbCode); 
-	alert("About to call initJBBot");
-	initJBBot();
-	alert("JB Bot Initialized.");
+	alert("End Of JBBot Bookmarklet. Hopefully the bot is up and running now.");
 }());
 */
 
@@ -25,9 +23,10 @@ javascript: (function () {
 
 
 // When loaded, we will init
-window.onload = function(e){ 
+//window.onload = function(e){ 
+$(document).ready(function() {
     initJBBot();
-}
+});
 
 ////////////////////////////////////////////////////////////////////
 // initEventListeners
