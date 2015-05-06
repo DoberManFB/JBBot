@@ -117,7 +117,6 @@ function onWaitListUpdate(rgUsers) {
 //
 function onChat(chatJSON) {
 	if (DoDebugSelfTest) {
-		alert("Chat type: " + chatJSON.type + " Message: " + chatJSON.message);
 		if ((chatJSON.type == "message") && (chatJSON.message.toLowerCase().substr(0,2) == "jb")) {
 				botSay("@" + chatJSON.un + " I got your message, but I'm still an infant and don't yet know how to respond. :(");
 		}
