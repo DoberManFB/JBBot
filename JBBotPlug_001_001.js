@@ -108,7 +108,7 @@ function wootCurrentSong() {
 	// $('#woot').click();
     // $('#button-vote-positive').click();
 	if (!fJBBotSpinning()) {
-		document.getElementById('button-vote-positive').click();
+		document.getElementById('woot').click();
 	}
 }
 
