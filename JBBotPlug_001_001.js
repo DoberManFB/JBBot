@@ -74,8 +74,11 @@ function onChat(chatJSON) {
 	if (chatJSON.type == "message") {
 		var msgLower = chatJSON.message.toLowerCase();
 		if (msgLower.indexOf("jb") > 0) {
-			if (msgLower.indexOf("where") && msgLower.indexOf("been")) {
-				botSayToUser("Some say I was on an island with Betty Davis, some say I was busy getting fired up on the the Mothership, some say I got trapped on an Unfunky UFO in the TT.FM solar system ... but I'm a bot of mystery so you'll hafta keep wondering.", chatJSON.un);
+			if ((msgLower.indexOf("where") >= 0) && (msgLower.indexOf("been") >= 0)) {
+				botSayToUser("Some say I was gettin busy with Betty Davis, some say I was stayin fired up on the the Mothership, some say I got trapped on an Unfunky TT.FM UFO, but this here bot-of-mystery ain't sayin.", chatJSON.un);
+			}
+			else if (((msgLower.indexOf("see") >= 0) && (msgLower.indexOf("again") >= 0)) || (msgLower.indexOf("back") >= 0)) {
+				botSayToUser("It's been too long. Missed the Cave. Glad to be back and glad to see you again!", chatJSON.un);
 			}
 			else if ((msgLower.substr(0,2) == "jb") || (msgLower.substr(0,3) == "@jb")) {
 				botSayToUser("I hear you, but I'm still blasted from my recent trip on the Mothership, so I dunno whatcha sayin.", chatJSON.un);
