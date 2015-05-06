@@ -18,6 +18,50 @@ javascript: (function () {
 
 // Globals (kept to a bare minimum)
 var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
+var IQuote = 0;
+var JbQuotes = ['Haiiii!', 
+				'Good God!', 
+				'Gonna step back, kiss myself!', 
+				'Take it to the bridge!', 
+				'Shake yo\' rump to the funk!', 
+				'I got ants in my pants and I need to dance!', 
+				'You\'re a shining star, no matter who you are!', 
+				'1.. 2.. 3.. hit it!', 
+				'Fellas, I\'m ready to get up and do my thing!', 
+				'I pity the fool who doesn\'t favorite this room!', 
+				'I\'ll take four fried chickens and a Coke!', 
+				'Give the drummer some!', 
+				'Shake your money maker!', 
+				'If you ain\'t gonna favorite, take your dead ass home!', 
+				'What time is it?', 
+				'Somebody bring me a mirror!', 
+				'Funk is what time it is!', 
+				'Raise up, get yourself together... drive that funky soul!', 
+				'Spelunk da funk!', 
+				'You gotta favorite... you know I like it!', 
+				'Sounds real good in here... let\'s keep it that way!', 
+				'Put your foot on the rock and don\'t stop!', 
+				'Aw, yeah... this is my joint!', 
+				'If you like the room, please favorite by clicking the star on the upper left, join the fb group in Room Info, and fan your fave DJs!', 
+				'Lekker, Lekker, Lekker!!', 
+				'Papa\'s got a brand new bot!', 
+				'Get on the scene, like a sex machine!!', 
+				'Funk... the final frontier!',  
+				'Come on with your come-on!', 
+				'Glory be to the one who knows what the funk\'s about!', 
+				'I don\'t know...but whats-ever you play, it\'s got to be funky!', 
+				'If you hear some funky fuss, it ain\'t nobody but us!', 
+				'Que pasa, people, que pasa HIT ME!', 
+				'Soul power!', 
+				'Soul vaccination...everybody get in line!', 
+				'We\'re gonna have a funky good time!', 
+				'What you gon\' play now?', 
+				'You gotta get in the bracket...you know I like it!', 
+				'I don\'t know Karate But I know Ka-Razor.', 
+				'Every Thing I do, Gohn be Fohnky', 
+				'Funkify your life get on down, you can be the funkiest one in town.', 
+				'You can\'t hold no groove, if you ain\'t got no pocket.', 
+				'If you can\'t funk with the best, then bump with the rest.']; 
 
 
 // Bring the bot to life
@@ -60,6 +104,18 @@ function botSayToUser(msg, username) {
 	botSay("@" + username + " " + msg);
 }
 
+////////////////////////////////////////////////////////////////////
+// sayQuote
+// Say the next JB Quote in chat
+//
+function sayQuote() {
+	if (IQuote >= JbQuotes.length) {
+		IQuote = 0;
+	}
+	botSay(JbQuotes[IQuote]);
+	IQuote++;
+}
+
 
 ////////////////////////////////////////////////////////////////////
 // onChat
@@ -83,6 +139,7 @@ function onChat(chatJSON) {
 			else if ((msgLower.substr(0,2) == "jb") || (msgLower.substr(0,3) == "@jb")) {
 				botSayToUser("I hear you, but I'm still blasted from my recent trip on the Mothership, so I dunno whatcha sayin.", chatJSON.un);
 			}
+			sayQuote();
 		}
 	}
 }
@@ -95,6 +152,7 @@ function onChat(chatJSON) {
 function onUserJoin(user) {
 	if (user && user.username && user.username != "") {
 		botSay("Hi @" + user.username + ". HDF is hosting tonight's Power Hour. The theme is Letter Game.");
+		sayQuote();
 	}
 }
 
@@ -105,6 +163,7 @@ function onUserJoin(user) {
 //
 function onUserLeave(user) {
 	if (user && user.username && user.username != "") {
+		sayQuote();
 		botSay("Looks like " + user.username + " is outta here.");
 	}
 }
