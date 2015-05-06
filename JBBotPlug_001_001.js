@@ -107,7 +107,23 @@ function onDjAdvance(jsonObj) {
 function wootCurrentSong() {
 	// $('#woot').click();
     // $('#button-vote-positive').click();
-	// document.getElementById('button-vote-positive').click();
+	if (!fJBBotSpinning()) {
+		document.getElementById('button-vote-positive').click();
+	}
+}
+
+////////////////////////////////////////////////////////////////////
+// fAnyoneSpinning
+// returns whether or not anyone is spinning 
+function fAnyoneSpinning() {
+    return (typeof API.getDJ() != 'undefined');
+}
+
+////////////////////////////////////////////////////////////////////
+// fBotSpinning
+// returns whether or not the bot is spinning 
+function fJBBotSpinning() {
+    return (fAnyoneSpinning() && (API.getDJ().id == API.getUser().id));
 }
 
 /*
@@ -149,19 +165,6 @@ function onWaitListUpdate(rgUsers) {
 	}
 }
 
-////////////////////////////////////////////////////////////////////
-// fAnyoneSpinning
-// returns whether or not anyone is spinning 
-function fAnyoneSpinning() {
-    return (typeof API.getDJ() != 'undefined');
-}
-
-////////////////////////////////////////////////////////////////////
-// fBotSpinning
-// returns whether or not the bot is spinning 
-function fJBBotSpinning() {
-    return (fAnyoneSpinning() && (API.getDJ().id == API.getUser().id));
-}
 	
 ////////////////////////////////////////////////////////////////////
 // fJBBotOnWaitlist
