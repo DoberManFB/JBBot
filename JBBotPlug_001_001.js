@@ -9,42 +9,36 @@
 /*
 javascript: (function () { 
 	var jbCode = document.createElement('script'); 
-	alert("Initializing JB Bot");
 	jbCode.setAttribute('id', 'jbbot_code'); 
 	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_001.js'); 
 	document.body.appendChild(jbCode); 
-	alert("End Of JBBot Bookmarklet. Hopefully the bot is up and running now.");
 }());
 */
 
 
 // Globals (kept to a bare minimum)
-// var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
+var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
 
 
-// $(document).ready(function() {
-	//alert("In Document Ready Function");
-    initJBBot();
-//});
+// Bring the bot to life
+initJBBot();
 
 
-	
 ////////////////////////////////////////////////////////////////////
-// initEventListeners
+// initJBBot
 // Setup the callbacks for Plug events that we want to capture
 //
 function initJBBot() {
-	alert("In initJBBot()");
-	/*
 	// Setup the callbacks for Plug events that we want to handle
 	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
 	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
-	*/
+	botSay("Hi Cave Fam!");
 }
-/*
+
+
 ////////////////////////////////////////////////////////////////////
 // botSay
 // The string passed in msg is displayed in Chat
@@ -120,7 +114,7 @@ function onWaitListUpdate(rgUsers) {
 //
 function onChat(chatJSON) {
 	if (DoDebugSelfTest) {
-		if ((chatJSON.type == "message") && (chatJSON.message.substr(0,2) == "JB") {
+		if ((chatJSON.type == "message") && (chatJSON.message.toLowerCase().substr(0,2) == "jb") {
 				botSay("@" + chatJSON.un + " I got your message, but I'm still an infant and don't yet know how to respond. :(");
 		}
 	}
@@ -130,7 +124,7 @@ function onChat(chatJSON) {
 // wootCurrentSong
 // click the woot button 
 function wootCurrentSong() {
-    $('#button-vote-positive').click();
+    // $('#button-vote-positive').click();
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -173,4 +167,3 @@ function jumpDown() {
 	}
 }
 
-*/
