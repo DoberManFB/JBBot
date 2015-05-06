@@ -18,6 +18,7 @@ javascript: (function () {
 
 // Globals (kept to a bare minimum)
 var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
+var JBQuoteTimerCallback = null;
 var IQuote = 0;
 var JbQuotes = ['Haiiii!', 
 				'Good God!', 
@@ -118,6 +119,23 @@ function sayQuote() {
 
 
 ////////////////////////////////////////////////////////////////////
+// sayQuoteSoon
+// Say the next JB Quote in chat after a delay
+//
+function sayQuoteSoon() {
+	if (JBQuoteTimerCallback != null) {
+		clearTimeout(JBQuoteTimerCallback);
+	}
+
+	// Set a new quote timer
+	JBQuoteTimerCallback = setTimeout( function() {
+		JBQuoteTimerCallback = null;
+		sayQuote();
+	}, 10000); // Timer fires in 10 seconds if not cleared by a new request  
+	
+}
+
+////////////////////////////////////////////////////////////////////
 // onChat
 // Called when someone enters text in chat
 // Plug passes a JSON object contining the following:
@@ -139,7 +157,7 @@ function onChat(chatJSON) {
 			else if ((msgLower.substr(0,2) == "jb") || (msgLower.substr(0,3) == "@jb")) {
 				botSayToUser("I hear you, but I'm still blasted from my recent trip on the Mothership, so I dunno whatcha sayin.", chatJSON.un);
 			}
-			sayQuote();
+			sayQuoteSoon();
 		}
 	}
 }
@@ -152,7 +170,7 @@ function onChat(chatJSON) {
 function onUserJoin(user) {
 	if (user && user.username && user.username != "") {
 		botSay("Hi @" + user.username + ". HDF is hosting tonight's Power Hour. The theme is Letter Game.");
-		sayQuote();
+		sayQuoteSoon();
 	}
 }
 
@@ -163,7 +181,7 @@ function onUserJoin(user) {
 //
 function onUserLeave(user) {
 	if (user && user.username && user.username != "") {
-		sayQuote();
+		sayQuoteSoon();
 		botSay("Looks like " + user.username + " is outta here.");
 	}
 }
