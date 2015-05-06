@@ -30,17 +30,16 @@ initJBBot();
 //
 function initJBBot() {
 	// Setup the callbacks for Plug events that we want to handle
-	alert("initJBBot");
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
-	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
-	
-/*	
 	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
+	
+/*	
+	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam");
+	botSay("Hi Cave Fam!");
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -89,6 +88,29 @@ function onChat(chatJSON) {
 }
 
 ////////////////////////////////////////////////////////////////////
+// onUserJoin
+// Called when somebody enters the cave. 
+// Plug passes in a user object.
+//
+function onUserJoin(user) {
+	if (user && user.username && user.username != "") {
+		botSay("Hi @" + user.username + ". HDF is hosting tonight's Power Hour. The theme is Letter Game.");
+	}
+}
+
+////////////////////////////////////////////////////////////////////
+// onUserLeave
+// Called when somebody leaves the cave.
+// Plug passes in a user object.
+//
+function onUserLeave(user) {
+	if (user && user.username && user.username != "") {
+		botSay("Looks like " + user.username + " is outta here.");
+	}
+}
+
+/*
+////////////////////////////////////////////////////////////////////
 // onDjAdvance
 // Called when the dj booth advances to the next play.
 // Plug passes in a JSON object containing:
@@ -130,28 +152,7 @@ function fJBBotSpinning() {
     return (fAnyoneSpinning() && (API.getDJ().id == API.getUser().id));
 }
 
-/*
-////////////////////////////////////////////////////////////////////
-// onUserJoin
-// Called when somebody enters the cave. 
-// Plug passes in a user object.
-//
-function onUserJoin(user) {
-	if (user && user.username && user.username != "") {
-		botSay("Hi " + user.username);
-	}
-}
 
-////////////////////////////////////////////////////////////////////
-// onUserLeave
-// Called when somebody leaves the cave.
-// Plug passes in a user object.
-//
-function onUserLeave(user) {
-	if (user && user.username && user.username != "") {
-		botSay(user.username + " has left the cave.");
-	}
-}
 
 
 ////////////////////////////////////////////////////////////////////
