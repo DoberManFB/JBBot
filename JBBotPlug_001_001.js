@@ -73,7 +73,7 @@ function botSayToUser(msg, username) {
 function onChat(chatJSON) {
 	if (chatJSON.type == "message") {
 		var msgLower = chatJSON.message.toLowerCase();
-		if (msgLower.indexOf("jb") > 0) {
+		if (msgLower.indexOf("jb") >= 0) {
 			if ((msgLower.indexOf("where") >= 0) && (msgLower.indexOf("been") >= 0)) {
 				botSayToUser("Some say I was gettin busy with Betty Davis, some say I was stayin fired up on the the Mothership, some say I got trapped on an Unfunky TT.FM UFO, but this here bot-of-mystery ain't sayin.", chatJSON.un);
 			}
