@@ -30,16 +30,17 @@ initJBBot();
 //
 function initJBBot() {
 	// Setup the callbacks for Plug events that we want to handle
-/*	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
+	API.on(API.CHAT, onChat); 			// Called on incomming chat
+		
+/*	
+	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
 	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
-	API.on(API.CHAT, onChat); 			// Called on incomming chat
 
 	botSay("Hi Cave Fam!");
 }
-
 
 ////////////////////////////////////////////////////////////////////
 // botSay
@@ -50,6 +51,39 @@ function botSay(msg) {
 		API.sendChat(msg);
 	}
 }
+
+////////////////////////////////////////////////////////////////////
+// botSayToUser
+// The string passed in msg is displayed in Chat, with @username prepended
+//
+function botSayToUser(msg, username) {
+	botSay("@" + username + " " + msg);
+}
+
+
+////////////////////////////////////////////////////////////////////
+// onChat
+// Called when someone enters text in chat
+// Plug passes a JSON object contining the following:
+//    	type: <string> // "message", "emote", "moderation", "system"
+//		un: <string> // the username of the sender
+//		uid: <int> // the user id of the sender
+//		message: <string> // the chat message
+//
+function onChat(chatJSON) {
+	if (chatJSON.type == "message") {
+		var msgLower = chatJSON.message.toLowerCase();
+		if (msgLower.indexOf("jb") > 0) {
+			if (msgLower.indexOf("where") && msgLower.indexOf("been")) {
+				botSayToUser("Some say I was on an island with Betty Davis, some say I was busy getting fired up on the the Mothership, some say I got trapped on an Unfunky UFO in the TT.FM solar system ... but I'm a bot of mystery so you'll hafta keep wondering.", chatJSON.un);
+			}
+			else if ((msgLower.substr(0,2) == "jb") || (msgLower.substr(0,3) == "@jb")) {
+				botSayToUser("I hear you, but I'm still blasted from my recent trip on the Mothership, so I dunno whatcha sayin.", chatJSON.un);
+			}
+		}
+	}
+}
+
 
 /*
 ////////////////////////////////////////////////////////////////////
@@ -105,25 +139,7 @@ function onWaitListUpdate(rgUsers) {
 		botSay(msg);
 	}
 }
-*/
-////////////////////////////////////////////////////////////////////
-// onChat
-// Called when someone enters text in chat
-// Plug passes a JSON object contining the following:
-//    	type: <string> // "message", "emote", "moderation", "system"
-//		un: <string> // the username of the sender
-//		uid: <int> // the user id of the sender
-//		message: <string> // the chat message
-//
-function onChat(chatJSON) {
-	if (DoDebugSelfTest) {
-		if ((chatJSON.type == "message") && (chatJSON.message.toLowerCase().substr(0,2) == "jb")) {
-				botSay("@" + chatJSON.un + " I got your message, but I'm still an infant and don't yet know how to respond. :(");
-		}
-	}
-}
 
-/*
 ////////////////////////////////////////////////////////////////////
 // wootCurrentSong
 // click the woot button 
