@@ -11,9 +11,9 @@ javascript: (function () {
 	var jbCode = document.createElement('script'); 
 	alert("Initializing JB Bot");
 	jbCode.setAttribute('id', 'jbbot_code'); 
-	jbCode.setAttribute('src', 'https://www.dropbox.com/s/7qindrcrpjbocur/JBBotPlug_001_001.js'); 
+	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/blob/master/JBBotPlug_001_001.js'); 
 	document.body.appendChild(jbCode); 
-	alert("Username: " + API.getUser().username);
+	alert("About to call initJBBot");
 	initJBBot();
 	alert("JB Bot Initialized.");
 }());
@@ -21,10 +21,13 @@ javascript: (function () {
 
 
 // Globals (kept to a bare minimum)
-// var jbBot = new JbBot;
-// var cave = new Cave;
 // var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
 
+
+// When loaded, we will init
+window.onload = function(e){ 
+    initJBBot();
+}
 
 ////////////////////////////////////////////////////////////////////
 // initEventListeners
