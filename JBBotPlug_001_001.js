@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 // JB Bot for the Funk & Soul Cave on Plug.DJ
-// Author: DoberManFB
+// Author: DoberManFB@gmail.com
 //
 // Due to differences between Plug and TT, this is a complete re-write rathter than a port of the TT.FM version.
 //
@@ -11,7 +11,7 @@ javascript: (function () {
 	var jbCode = document.createElement('script'); 
 	alert("Initializing JB Bot");
 	jbCode.setAttribute('id', 'jbbot_code'); 
-	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/blob/master/JBBotPlug_001_001.js'); 
+	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_001.js'); 
 	document.body.appendChild(jbCode); 
 	alert("End Of JBBot Bookmarklet. Hopefully the bot is up and running now.");
 }());
@@ -22,10 +22,10 @@ javascript: (function () {
 // var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
 
 
-$(document).ready(function() {
-	alert("In Document Ready Function");
+// $(document).ready(function() {
+	//alert("In Document Ready Function");
     initJBBot();
-});
+//});
 
 
 	
