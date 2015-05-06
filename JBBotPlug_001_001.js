@@ -39,7 +39,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam! ... I'm Baaaaacccckkkk!");
+	botSay("Hi Cave Fam");
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ function onChat(chatJSON) {
 // 		the lastPlay object, which is a JSON object of the last played item.
 // 
 function onDjAdvance(jsonObj) {
-	alert("onDjAdvance);
+	alert("onDjAdvance");
 	wootCurrentSong();
 }
 
