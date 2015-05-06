@@ -34,8 +34,9 @@ function initJBBot() {
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
 	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
-	API.on(API.CHAT, onChat); 			// Called on incomming chat
 */
+	API.on(API.CHAT, onChat); 			// Called on incomming chat
+
 	botSay("Hi Cave Fam!");
 }
 
@@ -104,7 +105,7 @@ function onWaitListUpdate(rgUsers) {
 		botSay(msg);
 	}
 }
-
+*/
 ////////////////////////////////////////////////////////////////////
 // onChat
 // Called when someone enters text in chat
@@ -116,12 +117,13 @@ function onWaitListUpdate(rgUsers) {
 //
 function onChat(chatJSON) {
 	if (DoDebugSelfTest) {
-		if ((chatJSON.type == "message") && (chatJSON.message.toLowerCase().substr(0,2) == "jb") {
+		if ((chatJSON.type == "message") && (chatJSON.message.toLowerCase().substr(0,2) == "jb")) {
 				botSay("@" + chatJSON.un + " I got your message, but I'm still an infant and don't yet know how to respond. :(");
 		}
 	}
 }
 
+/*
 ////////////////////////////////////////////////////////////////////
 // wootCurrentSong
 // click the woot button 
