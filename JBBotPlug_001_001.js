@@ -30,11 +30,12 @@ initJBBot();
 //
 function initJBBot() {
 	// Setup the callbacks for Plug events that we want to handle
-	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
+/*	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
 	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
+*/
 	botSay("Hi Cave Fam!");
 }
 
@@ -49,6 +50,7 @@ function botSay(msg) {
 	}
 }
 
+/*
 ////////////////////////////////////////////////////////////////////
 // onUserJoin
 // Called when somebody enters the cave. 
@@ -166,4 +168,4 @@ function jumpDown() {
 		API.djLeave();
 	}
 }
-
+*/
