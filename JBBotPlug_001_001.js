@@ -97,7 +97,7 @@ function onChat(chatJSON) {
 // 		and, if there was something playing before the advance, 
 // 		the lastPlay object, which is a JSON object of the last played item.
 // 
-function onDjAdvance(jsonObj) {
+function (jsonObj) {
 	wootCurrentSong();
 }
 
@@ -107,8 +107,10 @@ function onDjAdvance(jsonObj) {
 function wootCurrentSong() {
 	// $('#woot').click();
     // $('#button-vote-positive').click();
+	alert("wootCurrentSong()");
 	if (!fJBBotSpinning()) {
 		document.getElementById('woot').click();
+		alert("clicked woot");
 	}
 }
 
