@@ -31,11 +31,11 @@ initJBBot();
 function initJBBot() {
 	// Setup the callbacks for Plug events that we want to handle
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
-		
+	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
+	
 /*	
 	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
-	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
@@ -87,6 +87,28 @@ function onChat(chatJSON) {
 	}
 }
 
+////////////////////////////////////////////////////////////////////
+// onDjAdvance
+// Called when the dj booth advances to the next play.
+// Plug passes in a JSON object containing:
+//		a dj user object, 
+// 		the current media object, 
+// 		a score object, 
+// 		and, if there was something playing before the advance, 
+// 		the lastPlay object, which is a JSON object of the last played item.
+// 
+function onDjAdvance(jsonObj) {
+	wootCurrentSong();
+}
+
+////////////////////////////////////////////////////////////////////
+// wootCurrentSong
+// click the woot button 
+function wootCurrentSong() {
+	// $('#woot').click();
+    // $('#button-vote-positive').click();
+	// document.getElementById('button-vote-positive').click();
+}
 
 /*
 ////////////////////////////////////////////////////////////////////
@@ -111,22 +133,6 @@ function onUserLeave(user) {
 	}
 }
 
-////////////////////////////////////////////////////////////////////
-// onDjAdvance
-// Called when the dj booth advances to the next play.
-// Plug passes in a JSON object containing:
-//		a dj user object, 
-// 		the current media object, 
-// 		a score object, 
-// 		and, if there was something playing before the advance, 
-// 		the lastPlay object, which is a JSON object of the last played item.
-// 
-function onDjAdvance(jsonObj) {
-	wootCurrentSong();
-	if (DoDebugSelfTest) {
-		botSay("Self test: DJ Advance");
-	}
-}
 
 ////////////////////////////////////////////////////////////////////
 // onWaitListUpdate
@@ -141,13 +147,6 @@ function onWaitListUpdate(rgUsers) {
 		}
 		botSay(msg);
 	}
-}
-
-////////////////////////////////////////////////////////////////////
-// wootCurrentSong
-// click the woot button 
-function wootCurrentSong() {
-    // $('#button-vote-positive').click();
 }
 
 ////////////////////////////////////////////////////////////////////
