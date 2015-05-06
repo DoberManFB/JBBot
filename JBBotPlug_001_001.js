@@ -13,6 +13,11 @@ javascript: (function () {
 	jbCode.setAttribute('id', 'jbbot_code'); 
 	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/blob/master/JBBotPlug_001_001.js'); 
 	document.body.appendChild(jbCode); 
+	jbCode.onreadystatechange = function() {
+		if (this.readyState == 'complete') {
+			initJBBot();
+		}
+	}
 	alert("End Of JBBot Bookmarklet. Hopefully the bot is up and running now.");
 }());
 */
@@ -22,12 +27,10 @@ javascript: (function () {
 // var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
 
 
-// When loaded, we will init
-//window.onload = function(e){ 
-$(document).ready(function() {
-    initJBBot();
-});
+// This should run when the script is loaded ... hopefully :)
+initJBBot();
 
+	
 ////////////////////////////////////////////////////////////////////
 // initEventListeners
 // Setup the callbacks for Plug events that we want to capture
