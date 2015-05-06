@@ -30,6 +30,7 @@ initJBBot();
 //
 function initJBBot() {
 	// Setup the callbacks for Plug events that we want to handle
+	alert("initJBBot");
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
 	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
 	
