@@ -288,8 +288,7 @@ function fProcessBotCommands(msg, username) {
 	var chFirst = msg.charAt(0);
 
 	//see if it's a command 
-	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/")) 
-	{ 
+	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/")) { 
 		var sp = msg.search(" "); 
 		if (sp != -1) 
 		{	
@@ -300,8 +299,7 @@ function fProcessBotCommands(msg, username) {
 			cmd = msg.slice(1); 
 		} 
 	}
-	else
-	{
+	else {
 		cmd = msg.trim();
 	}
 	
@@ -355,7 +353,7 @@ function fProcessBotCommands(msg, username) {
 		case "bob":
 		case "bob!":
 		case "b":
-			botSay(username ' just asked me to bop!'); 
+			botSay(username + ' just asked me to bop!'); 
 			break; 
 				
 		// Unsupported Commands let the user know they are not suupoted
