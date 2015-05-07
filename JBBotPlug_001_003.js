@@ -290,12 +290,10 @@ function fProcessBotCommands(msg, username) {
 	//see if it's a command 
 	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/")) { 
 		var sp = msg.search(" "); 
-		if (sp != -1) 
-		{	
+		if (sp != -1) {	
 			cmd = msg.slice(1, sp); 
 		} 
-		else 
-		{ 
+		else { 
 			cmd = msg.slice(1); 
 		} 
 	}
