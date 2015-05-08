@@ -569,7 +569,8 @@ function fProcessBotCommands(msg, username, userID) {
 		case "commands":
 			botSayToUser("Basic commands: Info, Help, Rules, Bop, BRB, NoChat, YesChat, and Theme.", username); 
 			break;
-			
+
+/*			
 		case "modcommands":
 			if (fCaveStaff) {
 				botSayToUser("Mod commands currently include clearBrbList, clearNoChatList, startTheme, and endTheme. For now, phstart and phend just do themeStart and themeEnd.", username); 
@@ -577,8 +578,8 @@ function fProcessBotCommands(msg, username, userID) {
 			else
 				botSayToUser("Sorry, only cave staff (Bouncers, Managers, Co-Host, or Host) can use Mod Commands.", username); 
 			}
-
 			break;
+*/
 		
 		// RULES command
 		case "rules": 
