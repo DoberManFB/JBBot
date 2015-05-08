@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam!");
+	botSay("Hi Cave Fam! Bot is alive.");
 }
 
 // *****************************************************************
@@ -509,12 +509,11 @@ function themeStart(username, userID, msg, cmd) {
 		var themeNew = msg.trim();
 		var cmdTrim = cmd.trim();
 		
-		themeNew = (themeNew.length > cmdTrim.length) ? themeNew.substr(cmdTrim.length).trim() : "";
+		themeNew = (themeNew.length > cmdTrim.length) ? themeNew.substr(cmdTrim.length + 1).trim() : "";
 		
 		if (themeNew.length > 0) {
 			themeCur = themeNew; 
-			botSay("The theme is now: " + themeCur); 
-			// botSay('The new theme is: "' + themeCur + '".'); 
+			botSay('The new theme is: "' + themeCur + '".'); 
 		}
 		else {
 			botSayToUser('I didn\'t catch the theme. ' + (fHaveTheme() ? 'The theme is still "' + themeCur + '".' : " No theme is set."), username); 
@@ -543,24 +542,36 @@ function themeTell() {
 function fProcessBotCommands(msg, username, userID) {
 	var fRet = true;
 	var fCaveStaff = fIsCaveStaff(userID);
-	var cmd = "No Command";
-	var chFirst = msg.charAt(0);
+	var msgTrim = msg.trim();
+	var cmd = msgTrim.toLowerCase();
+	var chFirst = msgTrim.charAt(0);
+	var iFirstSpace = msgTrim.search(" "); 
+	var msgWithoutCommand = (iFirstSpace == -1) ? "" : msgTrim.slice(iFirstSpace+1).trim(); // trailing trim because there could be multiple spaces between command and the remaining msg
 
 	//see if it's a command 
-	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/")) { 
-		var sp = msg.search(" "); 
-		if (sp != -1) {	
-			cmd = msg.slice(1, sp); 
-		} 
-		else { 
-			cmd = msg.slice(1); 
-		} 
+	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/") || (chFirst == ".")) {
+		cmd = (iFirstSpace == -1) ? msgTrim.slice(1) : msgTrim.slice(1, iFirstSpace);
 	}
 	else {
-		cmd = msg.trim();
+		// allow a few commands to be multi-word (with spaces), even if there is no leading command character
+		if (iFirstSpace != -1) {
+			var firstWord = msgTrim.slice(0, iFirstSpace).trim();
+			switch (firstWord) 
+			{
+				// The commands below allow multiple words.
+				case "theme": 
+				case "newtheme": 
+				case "starttheme": 
+				case "themestart": 
+				case "phstart": 
+					cmd = firstWord;
+					break;
+					
+				default: 
+					break;	
+			}
+		}
 	}
-	
-	cmd = cmd.toLowerCase(); 
 
 	switch (cmd) 
 	{
