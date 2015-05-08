@@ -563,23 +563,19 @@ function fProcessBotCommands(msg, username, userID) {
 		case "help?":
 		case "?":
 		case "sayhelp": 
-			botSayToUser("To get started, add some Funk and/or Soul songs to a playlist (see bottom left corner of your window), activate the playlist (via Activate button in the playlist), and join the queue (via button at bottom left). Say COMMANDS to see a list of available commands.", username); 
+			botSayToUser("To get started, see bottom left of window to add some Funk and/or Soul songs to a playlist, activate the playlist, and join the queue. Say COMMANDS to see some additional commands.", username); 
 			break;
 
-//		case "h":
-//			botSay('Shortcut [h]elp: [a]dd, [d]rop, [l]ist, [b]op, [n]ochat, [y]eschat, [s]kipjb'); 
-//			break;
-
 		case "commands":
-			botSayToUser("Basic commands include Info, Help, Rules, Bop (or Jam), BRB (or AFK), ListBRB (you won't be on the list since chatting indicates you are no longer BRB), NoChat, YesChat, ListNoChat, and Theme. Many commands also have synonyms.", username); 
+			botSayToUser("Basic commands: Info, Help, Rules, Bop, BRB, NoChat, YesChat, and Theme.", username); 
 			break;
 			
 		case "modcommands":
 			if (fCaveStaff) {
-				botSayToUser("Mod commands currently include clearBrbList, clearNoChatList, startTheme, and endTheme. For now, phstart and phend just do themeStart and themeEnd. More to come soon.", username); 
+				botSayToUser("Mod commands currently include clearBrbList, clearNoChatList, startTheme, and endTheme. For now, phstart and phend just do themeStart and themeEnd.", username); 
 			}
 			else
-				botSayToUser('Sorry, only cave staff (Bouncers, Managers, Co-Host, or Host) can use Mod Commands.', username); 
+				botSayToUser("Sorry, only cave staff (Bouncers, Managers, Co-Host, or Host) can use Mod Commands.", username); 
 			}
 
 			break;
