@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam! Bot is alive.");
+	botSay("Hi Cave Fam! JB Bot is alive.");
 }
 
 // *****************************************************************
@@ -503,20 +503,15 @@ function themeClear(username, userID) {
 ////////////////////////////////////////////////////////////////////
 // themeStart
 // Start a new theme.
-function themeStart(username, userID, msg, cmd) {
+function themeStart(msgWithoutCmd, username, userID) {
 
 	if (fIsCaveStaff(userID)) {
-		var themeNew = msg.trim();
-		var cmdTrim = cmd.trim();
-		
-		themeNew = (themeNew.length > cmdTrim.length) ? themeNew.substr(cmdTrim.length + 1).trim() : "";
-		
-		if (themeNew.length > 0) {
-			themeCur = themeNew; 
-			botSay('The new theme is: "' + themeCur + '".'); 
+		if (msgWithoutCmd == "") {
+			botSayToUser('I didn\'t catch the theme. ' + (fHaveTheme() ? 'The theme is still "' + themeCur + '".' : " No theme is set."), username);
 		}
 		else {
-			botSayToUser('I didn\'t catch the theme. ' + (fHaveTheme() ? 'The theme is still "' + themeCur + '".' : " No theme is set."), username); 
+ 			themeCur = msgWithoutCmd; 
+			botSay('The new theme is: "' + themeCur + '".'); 
 		} 
 	}
 	else {
@@ -546,7 +541,7 @@ function fProcessBotCommands(msg, username, userID) {
 	var cmd = msgTrim.toLowerCase();
 	var chFirst = msgTrim.charAt(0);
 	var iFirstSpace = msgTrim.search(" "); 
-	var msgWithoutCommand = (iFirstSpace == -1) ? "" : msgTrim.slice(iFirstSpace+1).trim(); // trailing trim because there could be multiple spaces between command and the remaining msg
+	var msgWithoutCmd = (iFirstSpace == -1) ? "" : msgTrim.slice(iFirstSpace+1).trim(); // trailing trim because there could be multiple spaces between command and the remaining msg
 
 	//see if it's a command 
 	if ((chFirst == "!") || (chFirst == "\\") || (chFirst == "/") || (chFirst == ".")) {
@@ -771,16 +766,25 @@ function fProcessBotCommands(msg, username, userID) {
 
 		// Handle Theme commands		
 		case "theme": 
+			// Mods can set the theme, but other users can just display it.
+			if (fIsCaveStaff(userID)) {
+				themeStart(msgWithoutCmd, username, userID);
+			}
+			else {
+				themeTell();
+			}
+			break;
+
 		case "theme?": 
 		case "saytheme": 
 			themeTell();
 			break;
-		
+			
 		case "newtheme": 
 		case "starttheme": 
 		case "themestart": 
 		case "phstart": 		
-			themeStart(username, userID, msg, cmd);
+			themeStart(msgWithoutCmd, username, userID);
 			break;	
 			
 		//case "clear": 
