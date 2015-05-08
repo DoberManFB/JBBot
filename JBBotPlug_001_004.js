@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam! JB Bot is alive.");
+	botSay("Hi Cave Fam!");
 }
 
 // *****************************************************************
@@ -180,7 +180,6 @@ function onChat(chatJSON) {
 			}
 		}
 		
-
 		// Handle NoChat stuff after processing the command 'cause the command might be to get off NoChat
 		handleNoChatOnChat(msgLower, username);
 	}
@@ -194,12 +193,17 @@ function onChat(chatJSON) {
 function onUserJoin(user) {
 	if (user && user.username && user.username != "") {
 		var szOut = 'Hi @' + user.username + '.';
+
+		if (brbList.indexOf(user.username) >= 0) {
+			removeBRB(user.username); 
+			szOut += " Since you are back, I'll stop telling people who chat to you that you'll be right back.";
+		}
 		
 		// If we are running a theme, tell the user who just enterd what theme is running.
 		if (fHaveTheme()) {
 			szOut += ' We are spinning songs on theme: "' + themeCur + '"';
 		}
-		
+
 		botSay(szOut);
 		sayQuoteSoon();
 	}
@@ -212,8 +216,9 @@ function onUserJoin(user) {
 //
 function onUserLeave(user) {
 	if (user && user.username && user.username != "") {
-		sayQuoteSoon();
 		botSay("Looks like " + user.username + " is outta here.");
+		// removeNoChatQuietly(user.username); // Commented out 'cause we might want to keep them as nochat in case they are using cell phone and are in and out of the cave.
+		sayQuoteSoon();
 	}
 }
 
@@ -335,8 +340,7 @@ function sayQuoteSoon() {
 	JBQuoteTimerCallback = setTimeout( function() {
 		JBQuoteTimerCallback = null;
 		sayQuote();
-	}, 20000); // Timer fires in 20 seconds if not cleared by a new request  
-	
+	}, 30000); // Timer fires in 30 seconds if not cleared by a new request
 }
 
 
@@ -357,13 +361,20 @@ function addNoChat(username) {
 }
 
 ////////////////////////////////////////////////////////////////////
-// removeNoChat
-// Remove user specified by username from the No Chat list
-function removeNoChat(username) {
+// removeNoChatQuietly
+// Remove user specified by username from the No Chat list withouth mentioning it
+function removeNoChatQuietly(username) {
 	var i = noChatList.indexOf(username);
 	if (i >= 0) {
 		noChatList.splice(i, 1); 
 	}
+}
+
+////////////////////////////////////////////////////////////////////
+// removeNoChat
+// Remove user specified by username from the No Chat list
+function removeNoChat(username) {
+	removeNoChatQuietly(username);
 	botSayToUser("You are marked as available for chat.", username);
 }
 
