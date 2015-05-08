@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam");
+	botSay("Hi Cave Fam!");
 }
 
 // *****************************************************************
@@ -162,6 +162,9 @@ function onChat(chatJSON) {
 		var msg = chatJSON.message;
 		var msgLower = msg.toLowerCase();
 
+		// Handle Be Right Back before processing command 'cause the act of chatting takes the user off of the BRB list
+		handleBRBonChat(msgLower, username);
+		
 		if (!fProcessBotCommands(msg, username, userID)) {
 			if (msgLower.indexOf("jb") >= 0) {
 				if ((msgLower.indexOf("where") >= 0) && (msgLower.indexOf("been") >= 0)) {
@@ -177,8 +180,8 @@ function onChat(chatJSON) {
 			}
 		}
 		
-		 // Handle Be Right Back and NoChat stuff after processing the command 'cause the command might be to get off NoChat
-		handleBRBonChat(msgLower, username);
+
+		// Handle NoChat stuff after processing the command 'cause the command might be to get off NoChat
 		handleNoChatOnChat(msgLower, username);
 	}
 }
@@ -510,7 +513,8 @@ function themeStart(username, userID, msg, cmd) {
 		
 		if (themeNew.length > 0) {
 			themeCur = themeNew; 
-			botSay('The new theme is: "'+ themeCur + '".'); 
+			botSay("The theme is now: " + themeCur); 
+			// botSay('The new theme is: "' + themeCur + '".'); 
 		}
 		else {
 			botSayToUser('I didn\'t catch the theme. ' + (fHaveTheme() ? 'The theme is still "' + themeCur + '".' : " No theme is set."), username); 
