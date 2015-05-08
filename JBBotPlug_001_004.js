@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam! I've been restarted.");
+	botSay("Hi Cave Fam");
 }
 
 // *****************************************************************
@@ -161,9 +161,6 @@ function onChat(chatJSON) {
 		var userID = chatJSON.uid;
 		var msg = chatJSON.message;
 		var msgLower = msg.toLowerCase();
-		
-		handleBRBonChat(msgLower, username); // Handle Be Right Back stuff
-		handleNoChatOnChat(msgLower, username); // Handle Be Right Back stuff
 
 		if (!fProcessBotCommands(msg, username, userID)) {
 			if (msgLower.indexOf("jb") >= 0) {
@@ -179,6 +176,10 @@ function onChat(chatJSON) {
 				sayQuoteSoon();
 			}
 		}
+		
+		 // Handle Be Right Back and NoChat stuff after processing the command 'cause the command might be to get off NoChat
+		handleBRBonChat(msgLower, username);
+		handleNoChatOnChat(msgLower, username);
 	}
 }
 
@@ -331,7 +332,7 @@ function sayQuoteSoon() {
 	JBQuoteTimerCallback = setTimeout( function() {
 		JBQuoteTimerCallback = null;
 		sayQuote();
-	}, 10000); // Timer fires in 10 seconds if not cleared by a new request  
+	}, 20000); // Timer fires in 20 seconds if not cleared by a new request  
 	
 }
 
@@ -345,6 +346,10 @@ function sayQuoteSoon() {
 function addNoChat(username) {
 	if (noChatList.indexOf(username) == -1) {
 		noChatList.push(username);
+		botSayToUser("Until you say your are available to chat (YesChat or Chat+), I will let people who chat to you know you're not available for chat.", username);
+	}
+	else {
+		botSayToUser("You are already on the NoChat list. Say YesChat or Chat+ if you want to be marked as available for chat.", username);
 	}
 }
 
@@ -356,6 +361,7 @@ function removeNoChat(username) {
 	if (i >= 0) {
 		noChatList.splice(i, 1); 
 	}
+	botSayToUser("You are marked as available for chat.", username);
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -381,23 +387,21 @@ function clearNoChatList(username, userID) {
 ////////////////////////////////////////////////////////////////////
 // handleNoChatOnChat
 // When a user speaks in chat, remove them from the Be Right Back list
-// If someone speaks to a user who is on the BRB list, let them know that the user is
+// If someone speaks to a user who is on the No Chat list, let them know that the user is
 // not available to chat.
 function handleNoChatOnChat(msg, username) {
 	var msgLower = msg.toLowerCase();
 
-	removeBRB(username); // as soon as a user chats, [s]he is back from BRB
-	
-
+	// If someone other than the user mentions them, say they're not available
 	for (var i = 0; i < noChatList.length; i++) {
-		// If someone mentions a No Chat user, tell them the user is not available for chat
-		if (msgLower.indexOf(noChatList[i].toLowerCase()) != -1) {
-			botSayToUser(noChatList[i] + ' can\'t chat right now.', username); 
-		}
-		
 		// If someone on the No Chat list is chatting, warn them that they are on the no chat list.
 		if (username == noChatList[i]) {
 			botSayToUser(' you are listed as being unable to chat. You can remove yourself from the no chat list by saying yeschat or chat+ or c+', username); 
+		}
+		
+		// If someone mentions a No Chat user, tell them the user is not available for chat
+		else if (msgLower.indexOf(noChatList[i].toLowerCase()) != -1) {
+			botSayToUser(noChatList[i] + ' can\'t chat right now.', username); 
 		}
 	}
 }
@@ -412,6 +416,7 @@ function handleNoChatOnChat(msg, username) {
 function addBRB(username) {
 	if (brbList.indexOf(username) == -1) {
 		brbList.push(username);
+		botSayToUser("Until you get back and chat again, I'll tell people who chat to you that you'll be right back.", username); 
 	}
 }
 
@@ -453,12 +458,17 @@ function clearBRBList(username, userID) {
 function handleBRBonChat(msg, username) {
 	var msgLower = msg.toLowerCase();
 
-	removeBRB(username); // as soon as a user chats, [s]he is back from BRB
-	
-	// If someone mentions a Be Right Back user, tell them the user is away
-	for (var i = 0; i < brbList.length; i++) {
-		if (msgLower.indexOf(brbList[i].toLowerCase()) != -1) {
-			botSayToUser(brbList[i] + ' will be right back.', username); 
+	// Notice that a user has started chatting, so is no longer AFK (BRB)
+	if (brbList.indexOf(username) >=0) {
+		removeBRB(username); 
+		botSayToUser("I see you're back, so I'll stop telling people who chat to you that you'll be right back.", username); 
+	}
+	else {
+		// If someone mentions a Be Right Back user, tell them the user is away
+		for (var i = 0; i < brbList.length; i++) {
+			if (msgLower.indexOf(brbList[i].toLowerCase()) != -1) {
+				botSayToUser(brbList[i] + ' is will be right back.', username); 
+			}
 		}
 	}
 }
