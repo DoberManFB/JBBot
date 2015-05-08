@@ -19,7 +19,7 @@ javascript: (function () {
 // Globals
 var DoDebugSelfTest = true; // For debugging. Set to true for trace and debug output. Set to false for production bot
 
-var JBBotUsername = API.getUser().usrename;
+var JBBotUsername = API.getUser().username;
 var brbList = [];    // list of people who said they will be right back
 var noChatList = []; // list of people who said they are not available to chat
 var themeCur = ""; // PH theme, or temporary theme set when not on a PH
@@ -91,7 +91,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam!");
+	botSay("Hi Cave Fam! I've been restarted.");
 }
 
 // *****************************************************************
@@ -570,16 +570,16 @@ function fProcessBotCommands(msg, username, userID) {
 			botSayToUser("Basic commands: Info, Help, Rules, Bop, BRB, NoChat, YesChat, and Theme.", username); 
 			break;
 
-/*			
+		
 		case "modcommands":
 			if (fCaveStaff) {
 				botSayToUser("Mod commands currently include clearBrbList, clearNoChatList, startTheme, and endTheme. For now, phstart and phend just do themeStart and themeEnd.", username); 
 			}
-			else
+			else {
 				botSayToUser("Sorry, only cave staff (Bouncers, Managers, Co-Host, or Host) can use Mod Commands.", username); 
 			}
 			break;
-*/
+
 		
 		// RULES command
 		case "rules": 
