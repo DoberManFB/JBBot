@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////
 // JB Bot for the Funk & Soul Cave on Plug.DJ
-// Author: DoberManFB@gmail.com
+// Author: DoberManFB
 //
 // Due to differences between Plug and TT, this is a complete re-write rathter than a port of the TT.FM version.
 //
@@ -10,7 +10,7 @@
 javascript: (function () { 
 	var jbCode = document.createElement('script'); 
 	jbCode.setAttribute('id', 'jbbot_code'); 
-	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_001.js'); 
+	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_003.js'); 
 	document.body.appendChild(jbCode); 
 }());
 */
@@ -171,7 +171,7 @@ function onChat(chatJSON) {
 //
 function onUserJoin(user) {
 	if (user && user.username && user.username != "") {
-		botSay("Hi @" + user.username + ". HDF is hosting tonight's Power Hour. The theme is Letter Game.");
+		botSay("Hi @" + user.username + ".");
 		sayQuoteSoon();
 	}
 }
@@ -456,7 +456,7 @@ function fProcessBotCommands(msg, username) {
 		case "+c":
 		case "y":
 		case "yc":
-		case "brb":
+		//case "brb":
 		case "clearbrb":
 		case "clearnochat":
 		case "listnochat":				
