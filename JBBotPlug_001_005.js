@@ -235,9 +235,19 @@ function onUserLeave(user) {
 // 		the lastPlay object, which is a JSON object of the last played item.
 // 
 function onSongPlay(jsonObj) {
-	console.log("onSongPlay");
-	console.log(jsonObj);
+	// console.log("onSongPlay");
+	// console.log(jsonObj);
 	wootCurrentSongSoon();
+	
+/*
+	var author = jsonObj.media.author;
+	var title = jsonObj.media.title;
+	var duration = jsonObj.media.duration;
+	var djUsername = jsonObj.dj.username;
+	var djID = jsonObj.dj.id;
+	var djRole = jsonObj.dj.role;
+	playGameOnSongPlay(author, title, duration, djUsername, djID, djRole);
+*/
 }
 
 ////////////////////////////////////////////////////////////////////
