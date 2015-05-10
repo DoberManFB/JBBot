@@ -245,7 +245,7 @@ function onSongPlay(jsonObj) {
 // click the woot button after a delay
 function wootCurrentSongSoon() {
 	// Timer fires in 3 - 6 seconds
-	setTimeout(wootCurrentSong(), (Math.floor((Math.random() 4) + 3) * 1000));
+	setTimeout(wootCurrentSong, Math.floor((Math.random() * 4) + 3) * 1000);
 }
 
 ////////////////////////////////////////////////////////////////////
