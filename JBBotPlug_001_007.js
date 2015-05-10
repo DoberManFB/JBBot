@@ -351,6 +351,7 @@ function onJBBotJumpUpCmd(username) {
 		JBBotSayToUser("Thanks for asking me to spin, but I'm already in the DJ queue.", username);
 	}
 	else {
+		JBBotSayToUser("Okay, I'll spin some.", username);
 		startSpinningJBBot();
 	}
 }
