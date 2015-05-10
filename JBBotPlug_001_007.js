@@ -308,7 +308,8 @@ function onCaveWaitListUpdate(rgUsers) {
 // fJBBotOnWaitlist
 // returns whether or not the bot is spinning 
 function fJBBotOnWaitlist() {
-    return (API.getWiatListPosition(JBBotUserID) >= 0);
+    // return (API.getWaitListPosition(JBBotUserID) >= 0);
+	return (false); // temporarily pretend user is not on the waitlist
 }
 
 
