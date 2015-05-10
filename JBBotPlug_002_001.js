@@ -707,7 +707,7 @@ function JBBot() {
 	console.log("JBot ctor");
 	// this.say("Hi Cave Fam!");
 	
-	functoin sayHi() {
+	function sayHi() {
 		API.sendChat("Hi.");
 	}
 }
