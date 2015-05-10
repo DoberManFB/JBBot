@@ -47,7 +47,8 @@ function FSCave() {
 	API.on(API.ADVANCE, this.onSongPlayInCave);         // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, this.onDJQueueUpdate); // Called on any change to the DJ queue.
 
-	this.bot.say("Hi Cave Fam!");
+	// this.bot.say("Hi Cave Fam!");
+	this.bot.sayHi();
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -703,7 +704,7 @@ function JBBot() {
 					'Funkify your life get on down, you can be the funkiest one in town.', 
 					'You can\'t hold no groove, if you ain\'t got no pocket.', 
 					'If you can\'t funk with the best, then bump with the rest.']; 
-
+	console.log("JBot ctor");
 	// this.say("Hi Cave Fam!");
 }
 
@@ -713,6 +714,10 @@ JBBot.prototype.getName = function () {
 
 JBBot.prototype.getUserID = function () {
 	return (this.userID);
+}
+
+JBBot.prototype.sayHi = function() {
+	API.sendChat("Hi.");
 }
 
 JBBot.prototype.say = function (msg) {
