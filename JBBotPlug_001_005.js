@@ -85,14 +85,15 @@ function initJBBot() {
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
 	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
-	API.on(API.DJ_ADVANCE, onDjAdvance); // Called when the dj booth advances to the next play.
+	API.on(API.API.ADVANCE, onSongPlay); // Called when the dj booth advances to the next play.
+	
 	
 /*	
 
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam!");
+	botSay("Hi Cave Fam.");
 }
 
 // *****************************************************************
@@ -225,7 +226,7 @@ function onUserLeave(user) {
 
 
 ////////////////////////////////////////////////////////////////////
-// onDjAdvance
+// onSongPlay
 // Called when the dj booth advances to the next play.
 // Plug passes in a JSON object containing:
 //		a dj user object, 
@@ -234,8 +235,8 @@ function onUserLeave(user) {
 // 		and, if there was something playing before the advance, 
 // 		the lastPlay object, which is a JSON object of the last played item.
 // 
-function onDjAdvance(jsonObj) {
-	alert("onDjAdvance");
+function onSongPlay(jsonObj) {
+	alert("onSongPlay");
 	wootCurrentSong();
 }
 
