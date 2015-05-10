@@ -10,7 +10,7 @@
 javascript: (function () { 
 	var jbCode = document.createElement('script'); 
 	jbCode.setAttribute('id', 'jbbot_code'); 
-	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_004.js'); 
+	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_005.js'); 
 	document.body.appendChild(jbCode); 
 }());
 */
