@@ -94,9 +94,13 @@ function JBBotInit() {
 	JBBotSay("Hi Cave Fam!");
 }
 
+
 // *****************************************************************
+//
 // Output Utility Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // JBBotSay
 // The string passed in msg is displayed in Chat
@@ -117,8 +121,11 @@ function JBBotSayToUser(msg, username) {
 
 
 // *****************************************************************
+//
 // Security/Role utiltities
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // getCaveUserRole
 // return the role of the user, as in integer from 0-5:
@@ -141,8 +148,11 @@ function fIsCaveMod(userID) {
 
 
 // *****************************************************************
+//
 // Event Processing Callback Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // onCaveChat
 // Called when someone enters text in chat
@@ -222,7 +232,6 @@ function onUserExitCave(user) {
 	}
 }
 
-
 ////////////////////////////////////////////////////////////////////
 // onSongPlayInCave
 // Called when the dj booth advances to the next play.
@@ -269,6 +278,13 @@ function wootCurrentCaveSong() {
 	}
 }
 
+
+// *****************************************************************
+//
+// Bot Spinning Functions
+//
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // fAnyoneSpinningInCave
 // returns whether or not anyone is spinning 
@@ -282,11 +298,32 @@ function fAnyoneSpinningInCave() {
 function fJBBotSpinning() {
     return (fAnyoneSpinningInCave() && (API.getDJ().id == JBBotUserID));
 }
+	
+////////////////////////////////////////////////////////////////////
+// fJBBotOnWaitlist
+// returns whether or not the bot is spinning 
+function fJBBotOnWaitlist() {
+	// API.getWaitListPosition doesn't seem to be working, so we'll use our own
+    // return (API.getWaitListPosition(JBBotUserID) >= 0);
+    return (getCaveWaitListPosition(JBBotUserID) >= 0);
+}
 
+	
+////////////////////////////////////////////////////////////////////
+// getCaveWaitListPosition
+// Since API.getWaitListPosition() seems to be broken, this is a replacement
+function getCaveWaitListPosition(userid) {
+	var iRet = -1;
+	var wl = API.getWaitList();
+	var len = wl.length;
+	for (var i = 0; ((i < len) && (iRet == -1)); i++) {
+		if (wl[i].id == userid) {
+			iRet = i;
+		}
+	}
+    return (iRet);
+}
 
-// *****************************************************************
-// Bot Spinning Functions
-//
 ////////////////////////////////////////////////////////////////////
 // onCaveWaitListUpdate
 // Called when the users in the wait list change, 
@@ -302,16 +339,6 @@ function onCaveWaitListUpdate(rgUsers) {
 	JBBotSay(msg);
 */
 }
-
-	
-////////////////////////////////////////////////////////////////////
-// fJBBotOnWaitlist
-// returns whether or not the bot is spinning 
-function fJBBotOnWaitlist() {
-    // return (API.getWaitListPosition(JBBotUserID) >= 0);
-	return (false); // temporarily pretend user is not on the waitlist
-}
-
 
 ////////////////////////////////////////////////////////////////////
 // startSpinningJBBot
@@ -386,9 +413,13 @@ function onJBBotSkipCmd(username) {
 	}
 }
 
+
 // *****************************************************************
+//
 // Bot Quote Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // sayJBQuote
 // Say the next JB Quote in chat
@@ -420,8 +451,11 @@ function sayJBBotQuoteSoon() {
 
 
 // *****************************************************************
+//
 // NoChat Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // addCaveNoChat
 // Add user specified by username to the No Chat list
@@ -497,8 +531,11 @@ function handleNoChatOnCaveChat(msg, username) {
 
 
 // *****************************************************************
+//
 // BRB (Be Right Back) Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // addCaveBRB
 // Add user specified by username to the Be Right Back list
@@ -564,8 +601,11 @@ function handleBRBonCaveChat(msg, username) {
 
 
 // *****************************************************************
+//
 // Theme Functions
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // fHaveCaveTheme
 // Return true if a theme is set, false if no theme is set
@@ -614,8 +654,11 @@ function sayCaveTheme() {
 
 
 // *****************************************************************
+//
 // Command Processing
 //
+// *****************************************************************
+
 ////////////////////////////////////////////////////////////////////
 // fProcessJBBotCommands
 // Process bot commands entered through chat
@@ -915,3 +958,6 @@ function fProcessJBBotCommands(msg, username, userID) {
 	
 	return fRet;
 }
+// ***
+// EOF
+// ***
