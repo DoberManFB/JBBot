@@ -92,7 +92,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam.");
+	botSay("Hi Cave Fam!");
 }
 
 // *****************************************************************
@@ -237,7 +237,15 @@ function onUserLeave(user) {
 function onSongPlay(jsonObj) {
 	console.log("onSongPlay");
 	console.log(jsonObj);
-	wootCurrentSong();
+	wootCurrentSongSoon();
+}
+
+////////////////////////////////////////////////////////////////////
+// wootCurrentSongSoon
+// click the woot button after a delay
+function wootCurrentSongSoon() {
+	// Timer fires in 3 - 6 seconds
+	setTimeout(wootCurrentSong(), (Math.floor((Math.random() 4) + 3) * 1000));
 }
 
 ////////////////////////////////////////////////////////////////////
