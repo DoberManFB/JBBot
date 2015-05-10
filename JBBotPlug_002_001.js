@@ -706,6 +706,10 @@ function JBBot() {
 					'If you can\'t funk with the best, then bump with the rest.']; 
 	console.log("JBot ctor");
 	// this.say("Hi Cave Fam!");
+	
+	functoin sayHi() {
+		API.sendChat("Hi.");
+	}
 }
 
 JBBot.prototype.getName = function () {
