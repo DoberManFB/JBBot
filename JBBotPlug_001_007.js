@@ -10,7 +10,7 @@
 javascript: (function () { 
 	var jbCode = document.createElement('script'); 
 	jbCode.setAttribute('id', 'jbbot_code'); 
-	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_005.js'); 
+	jbCode.setAttribute('src', 'https://rawgithub.com/DoberManFB/JBBot/master/JBBotPlug_001_007.js'); 
 	document.body.appendChild(jbCode); 
 }());
 */
@@ -91,7 +91,7 @@ function JBBotInit() {
 	API.on(API.ADVANCE, onSongPlayInCave);     // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onCaveWaitListUpdate); // Called on any change to the DJ queue.
 
-	JBBotSay("Hi Cave Fam!");
+	JBBotSay("Hi Cave Fam! Bot Is Back!");
 }
 
 
