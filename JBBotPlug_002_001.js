@@ -47,6 +47,7 @@ function FSCave() {
 	API.on(API.ADVANCE, this.onSongPlayInCave);         // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, this.onDJQueueUpdate); // Called on any change to the DJ queue.
 
+	this.bot.say("Hi Cave Fam!");
 }
 
 ////////////////////////////////////////////////////////////////////
@@ -703,7 +704,7 @@ function JBBot() {
 					'You can\'t hold no groove, if you ain\'t got no pocket.', 
 					'If you can\'t funk with the best, then bump with the rest.']; 
 
-	this.say("Hi Cave Fam!");
+	// this.say("Hi Cave Fam!");
 }
 
 JBBot.prototype.getName = function () {
