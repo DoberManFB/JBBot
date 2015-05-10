@@ -92,7 +92,7 @@ function initJBBot() {
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam!");
+	botSay("Hi Cave Fam.");
 }
 
 // *****************************************************************
@@ -235,7 +235,8 @@ function onUserLeave(user) {
 // 		the lastPlay object, which is a JSON object of the last played item.
 // 
 function onSongPlay(jsonObj) {
-	alert("onSongPlay");
+	console.log("onSongPlay");
+	console.log(jsonObj);
 	wootCurrentSong();
 }
 
@@ -243,12 +244,11 @@ function onSongPlay(jsonObj) {
 // wootCurrentSong
 // click the woot button 
 function wootCurrentSong() {
-	alert("wootCurrentSong()");
 	if (!fJBBotSpinning()) {
 		// document.getElementById('woot').click();
 		// $('#button-vote-positive').click();
 		$('#woot').click();
-		alert("clicked woot");
+		console.log("Woot clicked.");
 	}
 }
 
