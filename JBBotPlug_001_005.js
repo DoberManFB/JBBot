@@ -85,15 +85,14 @@ function initJBBot() {
 	API.on(API.CHAT, onChat); 			// Called on incomming chat
 	API.on(API.USER_JOIN, onUserJoin); 	 // Called when somebody enters the cave.
 	API.on(API.USER_LEAVE, onUserLeave); // Called when somebody leaves the cave.
-	API.on(API.API.ADVANCE, onSongPlay); // Called when the dj booth advances to the next play.
-	
+	API.on(API.ADVANCE, onSongPlay); // Called when the dj booth advances to the next play.
 	
 /*	
 
 	API.on(API.WAIT_LIST_UPDATE, onWaitListUpdate); // Called on any change to the DJ queue.
 */
 
-	botSay("Hi Cave Fam.");
+	botSay("Hi Cave Fam!");
 }
 
 // *****************************************************************
