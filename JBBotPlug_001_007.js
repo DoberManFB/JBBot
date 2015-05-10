@@ -91,7 +91,7 @@ function JBBotInit() {
 	API.on(API.ADVANCE, onSongPlayInCave);     // Called when the dj booth advances to the next play.
 	API.on(API.WAIT_LIST_UPDATE, onCaveWaitListUpdate); // Called on any change to the DJ queue.
 
-	JBBotSay("Hi Cave Fam! Bot Is Back!");
+	JBBotSay("Hi Cave Fam! Bot is back for a visit.");
 }
 
 
